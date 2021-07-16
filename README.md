@@ -1,2 +1,2 @@
 # ToDoApp
-Simple To Do App with HTML, CSS, and Node.js
+Simple To Do App with HTML, CSS, and vanilla JS
