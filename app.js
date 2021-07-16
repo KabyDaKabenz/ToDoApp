@@ -61,6 +61,11 @@ function dragLeave(){
 }
 
 function dragDrop(e){
+    if(e.target.classList.contains('add')) {
+        document.querySelector('.no-status').appendChild(dragging)
+        e.target.parentElement.classList.add('red')
+        return
+    }
     e.target.appendChild(dragging)
     if(e.target.classList.contains('no-status')){
         e.target.classList.add('red')
