@@ -42,21 +42,24 @@ function dragStart(e){
     dragging = e.target
 }
 
-function dragEnd(){
+
+function dragEnd(e){
+    lightUpContainer(e)
     dragging = null
+    
 }
 
 function dragOver(e){
     e.preventDefault()
 }
 
-function dragLeave(){
+function dragLeave(e){
     const parent = dragging.parentElement
     const prev_sibling = dragging.previousElementSibling
     const next_sibling = dragging.nextElementSibling
     if((prev_sibling === null || prev_sibling.classList.contains('add') 
        || prev_sibling.classList.contains('header')) && next_sibling === null){
-        parent.classList.remove(parent.classList[2])
+        e.target.classList.remove(parent.classList[2])
     }
 }
 
@@ -67,12 +70,15 @@ function dragDrop(e){
         return
     }
     e.target.appendChild(dragging)
-    if(e.target.classList.contains('no-status')){
-        e.target.classList.add('red')
-     } else if (e.target.classList.contains('in-progress')){
-        e.target.classList.add('green')
-    } else if(e.target.classList.contains('will-do')) {
-        e.target.classList.add('blue')
+}
+
+function lightUpContainer(e){
+    if(e.target.parentElement.classList.contains('no-status')){
+        e.target.parentElement.classList.add('red')
+     } else if (e.target.parentElement.classList.contains('in-progress')){
+        e.target.parentElement.classList.add('green')
+    } else if(e.target.parentElement.classList.contains('will-do')) {
+        e.target.parentElement.classList.add('blue')
     }
 }
 
@@ -86,9 +92,6 @@ function updateOnDelete(e) {
         parent.classList.remove(parent.classList[2])
     }
 }
-
-
-
 
 //Event Listeners
 addToDo.addEventListener('click', (e) => {
