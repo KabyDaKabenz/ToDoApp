@@ -4,6 +4,7 @@ const noStatusContainer = document.querySelector('.no-status')
 const containers = document.querySelectorAll('.status')
 const toDos = document.querySelectorAll('.element')
 const delete_btns = document.querySelectorAll('.delete')
+const edit_btns = document.querySelectorAll('.edit_btn')
 let dragging = null
 
 // Event handlers
@@ -12,6 +13,8 @@ const createToDo = (e, content) => {
     const ToDoDiv = document.createElement('div')
     const ToDoText = document.createElement('div')
     const delete_btn = document.createElement('span')
+    const edit_btn_div = document.createElement('span')
+    const edit_btn = document.createElement('img')
    
     ToDoDiv.classList.add('element')
     ToDoDiv.draggable = true
@@ -25,9 +28,17 @@ const createToDo = (e, content) => {
         updateOnDelete(e)
         deleteToDo(e)
     })
+    edit_btn_div.classList.add('edit_btn')
+    edit_btn_div.addEventListener('click', updateToDo)
     
+    edit_btn.classList.add('edit')
+    edit_btn.src = "https://img.icons8.com/material-outlined/24/000000/edit--v1.png"
+    
+    edit_btn_div.appendChild(edit_btn)
     ToDoDiv.appendChild(ToDoText)
+    ToDoDiv.appendChild(edit_btn_div)
     ToDoDiv.appendChild(delete_btn)
+    
     ToDoDiv.addEventListener('dragstart', dragStart)
     ToDoDiv.addEventListener('dragend', dragEnd)
     noStatusContainer.appendChild(ToDoDiv)
@@ -93,6 +104,12 @@ function updateOnDelete(e) {
     }
 }
 
+function updateToDo(e){
+    const newToDo = prompt('Edit To Do', e.target.parentElement.previousElementSibling.innerText)
+    if (newToDo === '' || newToDo === null) return
+    e.target.parentElement.previousElementSibling.innerText = newToDo
+}
+
 //Event Listeners
 addToDo.addEventListener('click', (e) => {
     createToDo(e, prompt('Add new To Do'))
@@ -110,8 +127,12 @@ toDos.forEach(toDo => {
 })
 
 delete_btns.forEach(delete_btn => {
-    delete_btn.addEventListener('click', (e) => {
+    delete_btn.addEventListener('click', e => {
         updateOnDelete(e)
         deleteToDo(e)
     })
+})
+
+edit_btns.forEach(edit_btn => {
+    edit_btn.addEventListener('click', updateToDo)
 })
