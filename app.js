@@ -102,7 +102,6 @@ function updateOnDelete(e) {
     const next_sibling = e.target.parentElement.nextElementSibling
     if((prev_sibling === null || prev_sibling.classList.contains('add') 
        || prev_sibling.classList.contains('header')) && next_sibling === null){
-        console.log('gebna')
         parent.classList.remove(parent.classList[2])
     }
 }
