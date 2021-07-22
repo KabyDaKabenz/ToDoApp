@@ -75,6 +75,7 @@ body {
 
 .element .ToDo {
     margin: auto; 
+    padding: 0.5rem;
 }
 
 .element .delete {
