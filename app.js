@@ -50,6 +50,9 @@ const deleteToDo = (e) => {
 }
 
 function dragStart(e){
+   if(e.target.classList.contains('edit')){
+        e.preventDefault()
+    }
     dragging = e.target
 }
 
