@@ -78,6 +78,10 @@ function dragLeave(e){
 }
 
 function dragDrop(e){
+    if(e.target.classList.contains('ToDo') || e.target.classList.contains('element')
+       || e.target.classList.contains('edit') || e.target.classList.contains('delete')) {
+        return
+    } 
     if(e.target.classList.contains('add')) {
         document.querySelector('.no-status').appendChild(dragging)
         e.target.parentElement.classList.add('red')
